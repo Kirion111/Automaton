@@ -8,5 +8,8 @@
         <button text="Click Me!" id="button1" style="color: red;" />
         <button text="Click Me!" id="button2" style="color: green;" />
         <button text="Click Me!" onclick="this.text='Thanks!'" style="color: blue;" />
-    </hbox>    
+    </hbox>  
+    <vbox>
+        <label id="label1" text="hey, this is a text label"/>  
+    </vbox>
 </vbox>
