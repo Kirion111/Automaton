@@ -1,0 +1,5 @@
+namespace hx {
+unsigned char __res_105[] = {
+0x80, 0x00, 0x00, 0x80,
+98,104,0x00 };
+}
