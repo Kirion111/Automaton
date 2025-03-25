@@ -2,10 +2,10 @@ package ;
 
 import haxe.ui.HaxeUIApp;
 import haxe.ui.components.Button;
-import haxe.ui.components.Label;
 import haxe.ui.containers.dialogs.OpenFileDialog;
 #if sys
 import sys.FileSystem;
+import sys.io.File;
 #end
 
 class Main {
@@ -23,9 +23,6 @@ class Main {
             {
                 var helper = new OpenFileDialog();
                 helper.show();
-                helper.callback = function(btnn, files){
-                    
-                }
                 helper.onDialogClosed = function (event) {
                     var files = helper.selectedFiles;
                     if(event.canceled || files == null)
@@ -37,6 +34,7 @@ class Main {
                     if(FileSystem.exists(files[0].fullPath))
                     {
                         dMain.label1.htmlText="Valid File";
+                        dMain.content.htmlText=File.getContent(files[0].fullPath);
                     }
                     else
                         dMain.label1.htmlText="Invalid File";

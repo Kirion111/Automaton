@@ -11,5 +11,6 @@
     </hbox>  
     <vbox>
         <label id="label1" text="hey, this is a text label"/>  
+        <label id="content" text=""/>
     </vbox>
 </vbox>
