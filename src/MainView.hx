@@ -1,14 +1,47 @@
 package ;
 
 import haxe.ui.containers.VBox;
+import haxe.ui.containers.dialogs.OpenFileDialog;
 import haxe.ui.events.MouseEvent;
+import util.AutUtil;
+
+using StringTools;
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
 
 @:build(haxe.ui.ComponentBuilder.build("assets/main-view.xml"))
 class MainView extends VBox {
     public function new() {
         super();
-        button1.onClick = function(e) {
-            button1.text = "Thanks!";
+
+        load.onClick = function(e){
+            var helper = new OpenFileDialog();
+            helper.show();
+            helper.onDialogClosed = function (event) {
+                var files = helper.selectedFiles;
+                if(event.canceled || files == null)
+                {
+                    label1.htmlText="Invalid File";
+                    return;
+                }
+                if(!files[0].name.endsWith(".txt")){
+                    label1.htmlText="Invalid File (name:" + files[0].name+ ")";
+                    return;
+                }
+                #if sys
+                if(FileSystem.exists(files[0].fullPath))
+                {
+                    label1.htmlText="Valid File (name:" + files[0].name+ ")";
+                    AutUtil.getAutomaton(files[0].fullPath);
+                    content.htmlText="\nSigma: "+AutUtil.sigma+"\nF: "+AutUtil.dataF+"\nRoute Data: "+AutUtil.routeData;
+                    //oh.set_y(dMain.height - oh.height - 25);
+                }
+                else
+                    label1.htmlText="Invalid File";
+                #end
+            }
         }
     }
     

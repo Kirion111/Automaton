@@ -9,9 +9,6 @@
 			"source.sortImports": "explicit"
 		}
 	},
-	"haxe.displayServer": {
-		"arguments": ["-v"]
-	},
 	"haxe.enableExtendedIndentation": true
 	
 }
