@@ -1,6 +1,8 @@
 package ;
 
 import haxe.ui.containers.VBox;
+import haxe.ui.containers.dialogs.Dialogs;
+import haxe.ui.containers.dialogs.MessageBox;
 import haxe.ui.containers.dialogs.OpenFileDialog;
 import haxe.ui.events.MouseEvent;
 import util.AutUtil;
@@ -41,6 +43,16 @@ class MainView extends VBox {
                     label1.htmlText="Invalid File";
                 #end
             }
+        }
+        checkType.onClick = function(e){
+            if(AutUtil.routeData == null)
+            {
+                Dialogs.messageBox("Primero Carga un automata", "Error", MessageBoxType.TYPE_ERROR, true);
+                return;
+            }
+            final result:String = AutUtil.checkAutomaton() == true ? "NON " : "";
+            label1.htmlText="Automaton is Finite " + result + "deterministic";
+            trace("wasnt null");
         }
     }
     
