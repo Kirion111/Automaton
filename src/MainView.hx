@@ -36,7 +36,6 @@ class MainView extends VBox {
                     label1.htmlText="Valid File (name:" + files[0].name+ ")";
                     AutUtil.getAutomaton(files[0].fullPath);
                     content.htmlText="\nSigma: "+AutUtil.sigma+"\nF: "+AutUtil.dataF+"\nRoute Data: "+AutUtil.routeData;
-                    //oh.set_y(dMain.height - oh.height - 25);
                 }
                 else
                     label1.htmlText="Invalid File";

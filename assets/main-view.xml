@@ -17,8 +17,8 @@
         <label id="content" text=""/>
     </hbox>
     <hbox width="100%">
-        <button id="load"           text="cargar" height="50" width="33%"/>
-        <button id="checkType"      text="checar" height="50" width="34%"/>
-        <button id="checkString"    text="validar" height="50" width="33%"/>
+        <button id="load"           text="Cargar automata" height="50" width="33%"/>
+        <button id="checkType"      text="Checar automata" height="50" width="34%"/>
+        <button id="checkString"    text="Validar cadena" height="50" width="33%"/>
     </hbox>
 </vbox>

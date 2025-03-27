@@ -25,4 +25,8 @@ class AutUtil {
         #end
         return;
     }
+    public static function checkAutomaton()
+    {
+        
+    }
 }
