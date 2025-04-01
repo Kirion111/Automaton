@@ -6,6 +6,7 @@ import haxe.ui.containers.dialogs.MessageBox;
 import haxe.ui.containers.dialogs.OpenFileDialog;
 import haxe.ui.events.MouseEvent;
 import util.AutUtil;
+import util.TxtDialog;
 
 using StringTools;
 #if sys
@@ -54,10 +55,20 @@ class MainView extends VBox {
             label1.htmlText="Automaton is Finite " + result + "deterministic";
             trace("wasnt null");
         }
+        checkString.onClick = function(e){
+            if(AutUtil.routeData == null)
+            {
+                Dialogs.messageBox("Primero Carga un automata", "Error", MessageBoxType.TYPE_ERROR, true);
+                return;
+            }
+            var userInput = new TxtDialog();
+            userInput.showDialog();
+        }
     }
-    
+    /*
     @:bind(button2, MouseEvent.CLICK)
     private function onMyButton(e:MouseEvent) {
         button2.text = "Thanks!";
     }
+    */
 }

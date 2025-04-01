@@ -1,0 +1,6 @@
+<dialog width="300" title="Validar Cadena">
+    <grid width="100%">
+        <label text="Escriba la cadena" verticalAlign="center" />
+        <textfield id="autString" width="100%" />
+    </grid>
+</dialog>

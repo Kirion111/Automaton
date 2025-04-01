@@ -1,4 +1,4 @@
-<vbox width="100%" style="padding: 5px;">
+<vbox width="100%" height="100%" style="padding: 5px;">
     <style>
         #button1, #button2 {
             font-size: 20px;
@@ -7,16 +7,13 @@
             float: right;
         }
     </style>
-    <hbox width="100%">
-        <button text="Click Me!" id="button2" style="color: green;" />
-    </hbox>  
-    <hbox style="padding-top: 50px">
+    <hbox style="padding-top: 50px" height="30%">
         <label id="label1" text="Please Select a File"/>  
     </hbox>
-    <hbox width="100%"> 
+    <hbox width="100%" height="30%"> 
         <label id="content" text=""/>
     </hbox>
-    <hbox width="100%">
+    <hbox width="100%" height="40%">
         <button id="load"           text="Cargar automata" height="50" width="33%"/>
         <button id="checkType"      text="Checar automata" height="50" width="34%"/>
         <button id="checkString"    text="Validar cadena" height="50" width="33%"/>
