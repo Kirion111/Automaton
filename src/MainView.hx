@@ -53,7 +53,6 @@ class MainView extends VBox {
             }
             final result:String = AutUtil.checkAutomaton() == true ? "NON " : "";
             label1.htmlText="Automaton is Finite " + result + "deterministic";
-            trace("wasnt null");
         }
         checkString.onClick = function(e){
             if(AutUtil.routeData == null)
@@ -63,6 +62,37 @@ class MainView extends VBox {
             }
             var userInput = new TxtDialog();
             userInput.showDialog();
+        }
+        minAut.onClick = function (e) {
+            /*
+            En esta parte, consiste en solo mostrar los grupos de estados que lleven a los estados del automata
+            El punto es mostrar las rutas/estados importantes, en el proceso, se eliminan las rutas/estadis
+            que llevan al mismo lugar.
+            Se agrupan los estados que llevan al estado final y a los que llevan a ellos mismos (Sin contar
+            al estado final)
+            Se empieza a iterar en el grupo con mas elementos.
+            Si en dicho grup, resulta que terminan en un estado fuera de su grupo original, se saca de este grupo
+            de iteracion.
+            Al terminar la iteracion, se comprueba que este grupo resultante no sea el mismo que el grupo que se 
+            genero anteriormente. --?
+            Si es el caso, se hace una nueva iteracion con los elementos restantes, con los mismos pasos.
+
+            En el momento en el que se termine la iteracion, se agarra solo un estado representativo de cada grupo,
+            si hay mas de un elemento en un grupo, solo agarraras 1, el que sea (Random) realmente no importa.
+            */
+        }
+        dTransform.onClick = function(e) {
+            /*
+            En esta parte, vamos a transformar un algoritmo no determinista a determinista
+            Para esto, usaremos la ruta original, e iremos creando nuevos estados para aquellos que no existen en
+            en automata.
+            El algoritmo empezara a moverse entre estados, y a generar nuevos estados mientras va iterando
+            entre estos, si ve que un estado no existe, lo crea, si ya existe, lo ignora.
+            Cada nuevo estado tambien ira checando sus nuevos resultados.
+            
+            Los estados finales se vuelven quellos que tiene una union de uno de los estados finales originales.
+            */
+            
         }
     }
     /*
