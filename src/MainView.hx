@@ -80,6 +80,12 @@ class MainView extends VBox {
             En el momento en el que se termine la iteracion, se agarra solo un estado representativo de cada grupo,
             si hay mas de un elemento en un grupo, solo agarraras 1, el que sea (Random) realmente no importa.
             */
+            if(AutUtil.routeData == null)
+            {
+                Dialogs.messageBox("Primero Carga un automata", "Error", MessageBoxType.TYPE_ERROR, true);
+                return;
+            }
+            AutUtil.minimizeAFD();
         }
         dTransform.onClick = function(e) {
             /*
@@ -90,7 +96,7 @@ class MainView extends VBox {
             entre estos, si ve que un estado no existe, lo crea, si ya existe, lo ignora.
             Cada nuevo estado tambien ira checando sus nuevos resultados.
             
-            Los estados finales se vuelven quellos que tiene una union de uno de los estados finales originales.
+            Los estados finales se vuelven aquellos que tiene una union de uno de los estados finales originales.
             */
             
         }
