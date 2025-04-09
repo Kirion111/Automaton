@@ -5,6 +5,8 @@ import haxe.ui.containers.dialogs.Dialogs;
 import haxe.ui.containers.dialogs.MessageBox;
 import haxe.ui.containers.dialogs.OpenFileDialog;
 import haxe.ui.events.MouseEvent;
+import haxe.ui.notifications.NotificationManager;
+import haxe.ui.notifications.NotificationType;
 import util.AutUtil;
 import util.TxtDialog;
 
@@ -16,10 +18,12 @@ import sys.io.File;
 
 @:build(haxe.ui.ComponentBuilder.build("assets/main-view.xml"))
 class MainView extends VBox {
+    static var daPath:String = "";
     public function new() {
         super();
 
         load.onClick = function(e){
+            content_Min.htmlText = "";
             var helper = new OpenFileDialog();
             helper.show();
             helper.onDialogClosed = function (event) {
@@ -36,9 +40,12 @@ class MainView extends VBox {
                 #if sys
                 if(FileSystem.exists(files[0].fullPath))
                 {
+                    daPath = files[0].fullPath;
                     label1.htmlText="Valid File (name:" + files[0].name+ ")";
                     AutUtil.getAutomaton(files[0].fullPath);
-                    content.htmlText="\nSigma: "+AutUtil.sigma+"\nF: "+AutUtil.dataF+"\nRoute Data: "+AutUtil.routeData;
+                    sigma.htmlText="Sigma: {"+AutUtil.sigma+"}";
+                    dFinal.htmlText="F: "+AutUtil.dataF;
+                    content.htmlText="Route Data: "+AutUtil.routeData;
                 }
                 else
                     label1.htmlText="Invalid File";
@@ -85,7 +92,29 @@ class MainView extends VBox {
                 Dialogs.messageBox("Primero Carga un automata", "Error", MessageBoxType.TYPE_ERROR, true);
                 return;
             }
+            if(AutUtil.checkAutomaton())
+            {
+                NotificationManager.instance.addNotification({
+                    title: "No se puede Minimizar",
+                    body: "Su automata es Finito No Determinista",
+                    type: NotificationType.Error
+                });
+                return;
+            }
             AutUtil.minimizeAFD();
+            var txt = "";
+            if(AutUtil.daStringRoute != null)
+            {
+                for(key=>route in AutUtil.daMinAltRoute)
+                    txt+=key + "= |" + route.join(",")+ "|\n";
+            }
+            else
+            {
+                for(key=>route in AutUtil.daMinRoute)
+                    txt+=key + "= |" + route.join(",")+ "|\n";
+            }
+            content_Min.htmlText="El automata minimizado es:\n"+txt;
+            //Dialogs.messageBox("El automata minimizado es:\n"+txt, "Minimizacion", MessageBoxType.TYPE_INFO, true);
         }
         dTransform.onClick = function(e) {
             /*
@@ -98,7 +127,27 @@ class MainView extends VBox {
             
             Los estados finales se vuelven aquellos que tiene una union de uno de los estados finales originales.
             */
-            
+            if(AutUtil.routeData == null)
+            {
+                Dialogs.messageBox("Primero Carga un automata", "Error", MessageBoxType.TYPE_ERROR, true);
+                return;
+            }
+            if(!AutUtil.checkAutomaton())
+                {
+                    NotificationManager.instance.addNotification({
+                        title: "No se puede transformar",
+                        body: "Su automata ya es Finito Determinista",
+                        type: NotificationType.Info
+                    });
+                    return;
+                }
+            AutUtil.fromAFND_toAFD(daPath);
+            content.htmlText = "New Route Data:\n";
+            dFinal.htmlText="F: {"+AutUtil.daAltF.join(",")+"}";
+            for(state=>newState in AutUtil.daStringRoute)
+            {
+                content.htmlText +=state + " = |" + newState.join("-") + "|\n";
+            }
         }
     }
     /*

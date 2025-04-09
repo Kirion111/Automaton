@@ -7,16 +7,20 @@
             float: right;
         }
     </style>
-    <hbox style="padding-top: 50px" height="30%">
-        <label id="label1" text="Please Select a File"/>  
-        <label id="sigma" text=""/>
-        <label id="dFinal" text=""/> 
-        <label id="route" text=""/>
+    <hbox style="padding-top: 50px" height="15%" width="100%">
+        <label id="label1" text="Please Select a File" width="100%"/>  
+        <label id="sigma" text="" width="50%"/>
+        <label id="dFinal" text="" width="50%"/> 
     </hbox>
-    <hbox width="100%" height="30%"> 
-        <label id="content" text=""/>
+        <hbox style="padding-top: 50px" height="15%" width="100%"> 
+        <label id="sigma" text="" width="50%"/>
+        <label id="dFinal" text="" width="50%"/> 
     </hbox>
-    <hbox width="100%" height="40%">
+    <hbox width="100%" height="50%"> 
+        <label id="content" text="" width="50%"/>
+         <label id="content_Min" text="" width="50%"/>
+    </hbox>
+    <hbox width="100%" height="20%">
         <button id="load"           text="Cargar automata" height="50" width="20%"/>
         <button id="checkType"      text="Checar automata" height="50" width="20%"/>
         <button id="checkString"    text="Validar cadena"  height="50" width="20%"/>
